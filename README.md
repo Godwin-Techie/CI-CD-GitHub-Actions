@@ -89,6 +89,8 @@ The workflow is in `.github/workflows/ci.yml`. It runs on pushes and pull reques
 
 ## CI failure demonstration
 
+On the `demo/ci-failure` branch, I introduced a temporary Bash syntax error in `app/app.sh`. GitHub Actions correctly failed during validation. I then removed the error, pushed the fix, and confirmed the corrected workflow passed. The deliberate error is not present in the final applicatio
+
 To demonstrate CI failure handling, make a temporary branch, introduce a deliberate syntax error or failing test, and push the branch to GitHub. Confirm that the Actions run fails. Then remove the deliberate failure, push the correction, and confirm the final workflow passes. Do not leave the intentional failure in the final branch.
 
 ## Assumptions
