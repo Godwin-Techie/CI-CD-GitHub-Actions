@@ -1,0 +1,47 @@
+name: Bash CI
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  validate:
+    name: Validate Bash scripts
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Make scripts executable
+        run: chmod +x app/*.sh scripts/*.sh tests/*.sh grade.sh
+
+      - name: Lint project
+        run: ./scripts/lint.sh
+
+  test:
+    name: Run application tests
+    needs: validate
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Make scripts executable
+        run: chmod +x app/*.sh scripts/*.sh tests/*.sh grade.sh
+
+      - name: Run application tests
+        run: ./tests/test.sh
+
+  docker:
+    name: Build and smoke-test Docker image
+    needs: test
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Make scripts executable
+        run: chmod +x app/*.sh scripts/*.sh tests/*.sh grade.sh
+
+      - name: Build image and run smoke tests
+        run: ./scripts/build.sh
