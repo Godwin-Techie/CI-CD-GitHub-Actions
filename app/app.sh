@@ -188,4 +188,3 @@ case "$command_name" in
         invalid_input "unknown command: $command_name"
         ;;
 esac
-if then
